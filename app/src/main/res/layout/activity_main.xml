@@ -178,7 +178,7 @@
                             android:layout_marginRight="21dp"
                             android:layout_toLeftOf="@+id/sensorView0"
                             android:layout_toStartOf="@+id/sensorView0"
-                            android:text="Configuración de Riego"
+                            android:text="Configuración de Sensores"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textSize="21dp"
                             android:layout_weight="6.75" />

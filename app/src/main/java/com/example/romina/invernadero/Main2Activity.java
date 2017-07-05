@@ -43,7 +43,7 @@ public class Main2Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         btnVolver = (Button) findViewById(R.id.btnVolver);
-        Intent intent = getIntent();
+
 
 
          sensorHumedadAmbiente = (TextView) findViewById(R.id.txtHumedadAmbiente);

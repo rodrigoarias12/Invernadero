@@ -89,12 +89,12 @@ public class DeviceListActivity extends Activity {
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
 
 
-            i.putExtra("editTempAmbientemin", "12");
-            i.putExtra("editTempAmbienteMax", "30");
+            i.putExtra("editTempAmbientemin", "24");
+            i.putExtra("editTempAmbienteMax", "26");
             i.putExtra("editHumAmbMin", "40");
             i.putExtra("editHumAmbMax", "50");
-            i.putExtra("edithummin",  "40");
-            i.putExtra("editHumMax","50" );
+            i.putExtra("edithummin",  "78");
+            i.putExtra("editHumMax","100" );
 
 
             startActivity(i);

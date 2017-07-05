@@ -94,16 +94,8 @@ public class MainActivity extends Activity implements SensorEventListener {
         editHumAmbMax = (EditText) findViewById(R.id.editHumAmbienteMax);
         editTempAmbienteMax = (EditText) findViewById(R.id.editTempAmbienteMax);
         editTempAmbientemin = (EditText) findViewById(R.id.editTempAmbientemin);
-        //seteo de datos por default
-        if (editTempAmbientemin.getText() == null) {
-            edithummin.setText("40");
-            editHumMax.setText("50");
-            editHumAmbMin.setText("30");
-            editHumAmbMax.setText("60");
-            editTempAmbienteMax.setText("12");
-            editTempAmbientemin.setText("32");
 
-        }
+
 
         //para obtener los mensajes del bluetooth
         bluetoothIn = new Handler() {
