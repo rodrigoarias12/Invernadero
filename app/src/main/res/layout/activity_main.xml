@@ -1,0 +1,371 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:id="@+id/scrollView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5pt"
+            android:paddingRight="5pt">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/linearContenedor"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+                <LinearLayout
+                    android:id="@+id/linearPruebaConexion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Switch
+                        android:id="@+id/mySwitchModo"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="20dp"
+                        android:text="Modo Automatico" />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    />
+                <LinearLayout
+                    android:id="@+id/Conexion"
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:layout_above="@+id/linearContenedorProbarConexion"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="Activar sensores"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="20dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+
+                    android:id="@+id/linearPruebaConexion7">
+                    <Switch
+                        android:id="@+id/mySwitch"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:enabled="true"
+                        android:layout_marginTop="20dp"
+                        android:text="Prender LED" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_above="@+id/linearContenedorProbarConexion"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Conexion1">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/linearPruebaConexion1">
+
+                        <Switch
+                            android:id="@+id/mySwitch1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:enabled="true"
+                            android:layout_marginTop="20dp"
+                            android:text="Riego" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_above="@+id/linearContenedorProbarConexion"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Conexion3">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/linearPruebaConexion2">
+
+                        <Switch
+                            android:id="@+id/mySwitch2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_weight="1"
+                            android:layout_marginTop="20dp"
+                            android:enabled="true"
+                            android:text="Ventilación" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/linearContenedor3"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_above="@+id/linearContenedorProbarConexion"
+                        android:layout_height="27dp"
+                        android:id="@+id/Conexion4"
+                        android:weightSum="1">
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginEnd="21dp"
+                            android:layout_marginRight="21dp"
+                            android:layout_toLeftOf="@+id/sensorView0"
+                            android:layout_toStartOf="@+id/sensorView0"
+                            android:text="Configuración de Riego"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="21dp"
+                            android:layout_weight="6.75" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearPruebaConexion25"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvht"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/edithumMin"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:text="Humedad de la tierra (%)"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+                        <EditText
+                            android:id="@+id/edithumMin"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="number"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/edithumMax"
+                            android:layout_weight="1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="number"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearPruebaConexion23"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtView_HUmedadAyT"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/buttonOn"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:layout_marginRight="10dp"
+                            android:text="Humedad del Ambiente(%)"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
+
+                        <EditText
+                            android:id="@+id/editHumAmbienteMin"
+                            android:layout_weight="1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="number"
+
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editHumAmbienteMax"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearPruebaConexion24"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearPruebaConexion76"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txtTempAmbiente"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/buttonOn"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="1"
+                            android:text="Temperatura del Ambiente"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+                        <EditText
+                            android:id="@+id/editTempAmbientemin"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="number"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/editTempAmbienteMax"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="number"
+                            android:layout_weight="1"
+                            android:textSize="15sp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/linearPruebaConexion26"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnSetear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_weight="1"
+                            android:text="Aceptar"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="horizontal"
+                    />
+                <LinearLayout
+                 android:orientation="vertical"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:id="@+id/linearContenedorinfo"
+                 android:layout_alignParentTop="true"
+                 android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true">
+                  <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Conexion44"
+                    android:weightSum="1">
+                      <TextView
+                          android:id="@+id/textViewinfo"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginEnd="41dp"
+                          android:layout_marginRight="41dp"
+                          android:text="Información de sensores"
+                          android:textAppearance="?android:attr/textAppearanceSmall"
+                          android:textSize="21dp" />
+
+                      <Button
+                          android:id="@+id/btnInfoSensores"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:layout_alignParentRight="true"
+                          android:text="Ver" />
+                  </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

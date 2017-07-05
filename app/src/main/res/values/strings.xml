@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Invernadero</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="none_paired">Ningun dispositivo pudo ser vinculado</string>
+</resources>
