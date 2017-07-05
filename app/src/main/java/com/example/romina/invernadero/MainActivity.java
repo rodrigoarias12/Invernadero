@@ -477,9 +477,10 @@ public class MainActivity extends Activity implements SensorEventListener {
                     if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                         //near
                         Toast.makeText(getApplicationContext(), "Cerca", Toast.LENGTH_SHORT).show();
-                        led = 1;
+                        ventilacion = 1;
+                        SWVentilacion.setChecked(true);
 
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
+                        //                      mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     } else {
                     }
 
@@ -488,7 +489,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
                 case Sensor.TYPE_LIGHT:
                     float[] values1 = event.values;
-                    if ((Math.abs(values1[0]) < 4)) {
+                    if ((Math.abs(values1[0]) > 800)) {
                         txt += "Luminosidad\n";
                         txt += event.values[0] + " Lux \n";
                         Toast.makeText(getBaseContext(), txt, Toast.LENGTH_SHORT).show();
@@ -496,8 +497,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 
                         led = 1;
+                        SWLed.setChecked(true);
 
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
+//                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     }
 
                     break;
@@ -508,7 +510,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                     if ((Math.abs(values[0]) > ACC || Math.abs(values[1]) > ACC || Math.abs(values[2]) > ACC)) {
                         Log.i("sensor", "running");
                         led = 1;
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
+                        SWLed.setChecked(true);
+                       // mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                         Toast.makeText(getBaseContext(), "shake prendo led", Toast.LENGTH_SHORT).show();
                     }
 
