@@ -24,10 +24,10 @@ public class Main2Activity extends Activity {
     Button btnVolver;
     TextView  sensorNivelAgua,sensorHumedadTierra,sensorHumedadAmbiente,sensorTemperaturaAmbiente;
 
-    // EXTRA string to send on to mainactivity
+    // EXTRA es un string para enviar a mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
-    // String for MAC address
+    // String que contiene la direccion MAC
     private static String address = null;
 
     public static String Configurar= "Mensaje";
@@ -54,7 +54,7 @@ public class Main2Activity extends Activity {
         //cargar los valores de los sensores
         Intent intent1 = getIntent();
 
-        //Get the MAC address from the MainActivity via EXTRA
+        //Obtengo la direccion MAC de MainActivity via EXTRA
         sensorHumedadAmbiente.setText(intent1.getStringExtra("sensorHumedadAmbiente"));
         sensorHumedadTierra.setText(intent1.getStringExtra("sensorHumedadTierra"));
         sensorNivelAgua.setText(intent1.getStringExtra("sensorNivelAgua"));
@@ -88,10 +88,10 @@ public class Main2Activity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-        //Get MAC address from DeviceListActivity via intent
+        //Obtengo la direccion MAC de DeviceListActivity via intent
         Intent i = getIntent();
 
-        //Get the MAC address from the MainActivity via EXTRA
+        //Obtengo la direccion MAC de MainActivity via EXTRA
         address = i.getStringExtra(MainActivity.EXTRA_DEVICE_ADDRESS);
         led  = i.getIntExtra("led",0);
         riego =  i.getIntExtra("riego",0);
@@ -106,7 +106,7 @@ public class Main2Activity extends Activity {
 
         Log.i("main2", "adress : " + editTempAmbientemin + editTempAmbienteMax+editHumAmbMin+editHumAmbMax);
 
-        //create device and set the MAC address
+        //Creo un dispositivo y seteo la direccion mac
         Log.i("main2", "adress : " + address);
     }
 

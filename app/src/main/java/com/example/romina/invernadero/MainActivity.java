@@ -49,23 +49,23 @@ public class MainActivity extends Activity implements SensorEventListener {
 
     Handler bluetoothIn;
 
-    // EXTRA string to send on to mainactivity
+    // String para enviar a mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
     public static String Configurar = "Mensaje";
     private static String mensaje = null;
 
-    final int handlerState = 0;                         //used to identify handler message
+    final int handlerState = 0;                         //utilizado para identificar handler message
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
     private StringBuilder recDataString = new StringBuilder();
 
     private ConnectedThread mConnectedThread;
 
-    // SPP UUID service - this should work for most devices
+    // SPP UUID service
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // String for MAC address
+    // String para MAC address
     private static String address = null;
     public static int riego, led, ventilacion,reset;
     private static String sensorHumedadTierra, sensorHumedadAmbiente, sensorNivelAgua, sensorTemperaturaAmbiente;
@@ -108,15 +108,15 @@ public class MainActivity extends Activity implements SensorEventListener {
         //para obtener los mensajes del bluetooth
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
-                if (msg.what == handlerState) {//if message is what we want
+                if (msg.what == handlerState) {
                     String jsonStr = msg.obj.toString().replaceAll("\\\\", "");
                     ;
                     String readMessage = (String) msg.obj;
 
-                    recDataString.append(readMessage);                                    //keep appending to string until ~
-                    int endOfLineIndex = recDataString.indexOf("}");                    // determine the end-of-line
+                    recDataString.append(readMessage);
+                    int endOfLineIndex = recDataString.indexOf("}");                    // determina el fin de linea
                     if (endOfLineIndex > 0) {
-                        String dataInPrint = recDataString.substring(0, endOfLineIndex + 1);    // extract string
+                        String dataInPrint = recDataString.substring(0, endOfLineIndex + 1);    // extraigo el string
                         try {
                             JSONObject obj = new JSONObject(dataInPrint);
                             sensorHumedadTierra = (obj.getString("HumedadTierra"));
@@ -136,7 +136,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                             Log.e("My App", "Could not parse malformed JSON: \"" + jsonStr + "\"");
                         }
 
-                        recDataString.delete(0, recDataString.length());                    //clear all string data
+                        recDataString.delete(0, recDataString.length());                    //limpio el string
 
                     }
 
@@ -146,7 +146,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         };
 
 
-        btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
+        btAdapter = BluetoothAdapter.getDefaultAdapter();       // Bluetooth adapter
         checkBTState();
 
         SWModo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -302,7 +302,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 
         return device.createRfcommSocketToServiceRecord(BTMODULEUUID);
-        //creates secure outgoing connecetion with BT device using UUID
+
     }
 
     //chequeo que en android este disponible el bluetooth , si no pregunto activar
@@ -319,18 +319,18 @@ public class MainActivity extends Activity implements SensorEventListener {
         }
     }
 
-    //create new class for connect thread
+    //Creo la clase para la conexion Bluetooth
     private class ConnectedThread extends Thread {
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
 
-        //creation of the connect thread
+        //Creo el Hilo correspondiente a la conexion Bluetooth
         public ConnectedThread(BluetoothSocket socket) {
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
 
             try {
-                //Create I/O streams for connection
+
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
@@ -345,12 +345,12 @@ public class MainActivity extends Activity implements SensorEventListener {
             byte[] buffer = new byte[556];
             int bytes;
 
-            // Keep looping to listen for received messages
+            // Esperando la recepcion de mensajes
             while (true) {
                 try {
-                    bytes = mmInStream.read(buffer);            //read bytes from input buffer
+                    bytes = mmInStream.read(buffer);            //leo del buffer
                     String readMessage = new String(buffer, 0, bytes);
-                    // Send the obtained bytes to the UI Activity via handler
+                    // Envio mensaje via handler
                     bluetoothIn.obtainMessage(handlerState, bytes, -1, readMessage).sendToTarget();
                 } catch (IOException e) {
                     break;
@@ -358,14 +358,13 @@ public class MainActivity extends Activity implements SensorEventListener {
             }
         }
 
-        //write method
+        //Metodo de Escritura
         public void write(String input) {
-            byte[] msgBuffer = input.getBytes();           //converts entered String into bytes
+            byte[] msgBuffer = input.getBytes();           //convierto string en bytes
             try {
-                mmOutStream.write(msgBuffer);                //write bytes over BT connection via outstream
+                mmOutStream.write(msgBuffer);                //escribo los bytes a traves del BT
             } catch (IOException e) {
-                //if you cannot write, close the application
-                //  Toast.makeText(getBaseContext(), "La Conexión fallo", Toast.LENGTH_LONG).show();
+
                 finish();
 
             }
@@ -375,10 +374,10 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     public void onResume() {
         super.onResume();
-        //Get MAC address from DeviceListActivity via intent
+        //Obtengo la direccion MAC y se la envio a DeviceListActivity via intent
         Intent i = getIntent();
 
-        //Get the MAC address from the DeviceListActivty via EXTRA
+        //Obtengo la direccion MAC de DeviceListActivty via EXTRA
         address = i.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
         mensaje = i.getStringExtra(Main2Activity.Configurar);
 
@@ -391,7 +390,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         reset =  datos.getInt("reset");
         ventilacion = datos.getInt("ventilacion");
 
-        if( reset ==2){//modoautomatico
+        if( reset ==2){//modo automatico
             SWLed.setEnabled(false);
             SWModo.setChecked(true);
             SWVentilacion.setEnabled(false);
@@ -491,8 +490,6 @@ public class MainActivity extends Activity implements SensorEventListener {
                         mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     } else {
                     }
-                    //   Toast.makeText(getBaseContext(), "proximidad detectada" + txt, Toast.LENGTH_SHORT).show();
-                    // mConnectedThread.write(  "{\"Led\":0,\"Riego\":0,\"Ventilacion\":1,\"Reset\":0,\"TemperaturaAmbienteMin\":12,\"TemperaturaAmbienteMax\":12,\"HumedadAmbienteMin\":12,\"HumedadAmbienteMax\":12,\"HumedadTierraMin\":12,\"HumedadTierraMax\":12}");    // Send "1" via Bluetooth
 
 
                     break;
@@ -510,7 +507,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 
                         mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     }
-                    // luminosidad.setText(txt);
+
                     break;
                 case Sensor.TYPE_ACCELEROMETER:
 

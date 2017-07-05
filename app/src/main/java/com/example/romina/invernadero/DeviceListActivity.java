@@ -19,15 +19,15 @@ import java.util.Set;
 
 
 public class DeviceListActivity extends Activity {
-    // Debugging for LOGCAT
+    // Debugging
     private static final String TAG = "DeviceListActivity";
     private static final boolean D = true;
     TextView textView1;
 
-    // EXTRA string to send on to mainactivity
+    // EXTRA es un string para enviar a  mainactivity
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
 
-    // Member fields
+    // Bluetooth
     private BluetoothAdapter mBtAdapter;
     private ArrayAdapter<String> mPairedDevicesArrayAdapter;
 
@@ -48,24 +48,24 @@ public class DeviceListActivity extends Activity {
         textView1.setTextSize(40);
         textView1.setText(" ");
 
-        // Initialize array adapter for paired devices
+        // Inicializo el Array adapter para dispositivos vinculados
         mPairedDevicesArrayAdapter = new ArrayAdapter<String>(this, R.layout.device_name);
 
-        // Find and set up the ListView for paired devices
+        // Muestro la lita de dispositivos
         ListView pairedListView = (ListView) findViewById(R.id.paired_devices);
         pairedListView.setAdapter(mPairedDevicesArrayAdapter);
        //para cada elemento de la lista le voy a dar un onclick evento que se dispara
         pairedListView.setOnItemClickListener(mDeviceClickListener);
 
-        // Get the local Bluetooth adapter
+        // Obtengo Bluetooth adapter
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        // Get a set of currently paired devices and append to 'pairedDevices'
+
         Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
 
-        // Add previosuly paired devices to the array
+
         if (pairedDevices.size() > 0) {
-            findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);//make title viewable
+            findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);//Muestro el nombre
             for (BluetoothDevice device : pairedDevices) {
                 //cargo en la lista el nombre de dispositivos vinculados y sus direcciones mac
                 mPairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
@@ -76,7 +76,7 @@ public class DeviceListActivity extends Activity {
         }
     }
 
-    // Set up on-click listener for the list (nicked this - unsure)
+    // Estoy escuchando, en cualquiera que haga click para enlazar
     private OnItemClickListener mDeviceClickListener = new OnItemClickListener() {
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
 
@@ -103,17 +103,17 @@ public class DeviceListActivity extends Activity {
     //chekeo conexion con el bluetooth
     //Si esta apagado envio mensaje por pantalla para activar
     private void checkBTState() {
-        // Check device has Bluetooth and that it is turned on
-        mBtAdapter=BluetoothAdapter.getDefaultAdapter(); // CHECK THIS OUT THAT IT WORKS!!!
+        // Chequeo si el dispositivo tiene Bluetooth y si esta prendido
+        mBtAdapter=BluetoothAdapter.getDefaultAdapter();
         if(mBtAdapter==null) {
             Toast.makeText(getBaseContext(), "El dispositivo no soporta Bluetooth", Toast.LENGTH_SHORT).show();
         } else {
             if (mBtAdapter.isEnabled()) {
                 Log.d(TAG, "...Bluetooth Activado...");
             } else {
-                //Prompt user to turn on Bluetooth
+
                 //Con esto hago que pregunte
-                //Puedo activar el Bluetooth ?
+                //Puedo activar el Bluetooth ? En caso de que este apagado
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, 1);
             }
