@@ -87,6 +87,16 @@ public class DeviceListActivity extends Activity {
             //hacer un intent a la actividad principal con la direccion mac del dispositivo que seleccione
             Intent i = new Intent(DeviceListActivity.this, MainActivity.class);
             i.putExtra(EXTRA_DEVICE_ADDRESS, address);
+
+
+            i.putExtra("editTempAmbientemin", "12");
+            i.putExtra("editTempAmbienteMax", "30");
+            i.putExtra("editHumAmbMin", "40");
+            i.putExtra("editHumAmbMax", "50");
+            i.putExtra("edithummin",  "40");
+            i.putExtra("editHumMax","50" );
+
+
             startActivity(i);
         }
     };

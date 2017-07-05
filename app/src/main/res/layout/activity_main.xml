@@ -80,7 +80,6 @@
                         android:layout_height="fill_parent"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:enabled="true"
                         android:layout_marginTop="20dp"
                         android:text="Prender LED" />
 
@@ -110,7 +109,6 @@
                             android:layout_height="fill_parent"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentTop="true"
-                            android:enabled="true"
                             android:layout_marginTop="20dp"
                             android:text="Riego" />
                     </LinearLayout>
@@ -143,7 +141,6 @@
                             android:layout_alignParentTop="true"
                             android:layout_weight="1"
                             android:layout_marginTop="20dp"
-                            android:enabled="true"
                             android:text="Ventilación" />
                     </LinearLayout>
 

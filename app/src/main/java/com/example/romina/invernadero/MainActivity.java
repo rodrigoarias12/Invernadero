@@ -3,7 +3,6 @@ package com.example.romina.invernadero;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLClientInfoException;
 import java.util.UUID;
 
 import android.app.Activity;
@@ -96,13 +95,15 @@ public class MainActivity extends Activity implements SensorEventListener {
         editTempAmbienteMax = (EditText) findViewById(R.id.editTempAmbienteMax);
         editTempAmbientemin = (EditText) findViewById(R.id.editTempAmbientemin);
         //seteo de datos por default
-        edithummin.setText("40");
-        editHumMax.setText("50");
-        editHumAmbMin.setText("30");
-        editHumAmbMax.setText("60");
-        editTempAmbienteMax.setText("12");
-        editTempAmbientemin.setText("32");
+        if (editTempAmbientemin.getText() == null) {
+            edithummin.setText("40");
+            editHumMax.setText("50");
+            editHumAmbMin.setText("30");
+            editHumAmbMax.setText("60");
+            editTempAmbienteMax.setText("12");
+            editTempAmbientemin.setText("32");
 
+        }
 
         //para obtener los mensajes del bluetooth
         bluetoothIn = new Handler() {
@@ -156,12 +157,17 @@ public class MainActivity extends Activity implements SensorEventListener {
 
                 if (isChecked) {
                     reset=2;
-                    SWModo.setEnabled(false);
+                   SWLed.setEnabled(false);
+                    SWVentilacion.setEnabled(false);
+                    SWRiego.setEnabled(false);
                     mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     Toast.makeText(getBaseContext(), "Modo automatico", Toast.LENGTH_SHORT).show();
 
                 } else {
                     reset=0;
+                    SWLed.setEnabled(true);
+                    SWVentilacion.setEnabled(true);
+                    SWRiego.setEnabled(true);
                     mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     Toast.makeText(getBaseContext(), "Modo manual", Toast.LENGTH_SHORT).show();
                 }
@@ -234,9 +240,22 @@ public class MainActivity extends Activity implements SensorEventListener {
                 i.putExtra("sensorNivelAgua", sensorNivelAgua);
                 i.putExtra("sensorTemperaturaAmbiente", sensorTemperaturaAmbiente);
 
+                //datos a persistir entre activity
+                i.putExtra("led", led);
+                i.putExtra("riego", riego);
+                i.putExtra("ventilacion", ventilacion);
+                i.putExtra("reset", reset);
+                i.putExtra("editTempAmbientemin", editTempAmbientemin.getText().toString());
+                i.putExtra("editTempAmbienteMax", editTempAmbienteMax.getText().toString());
+                i.putExtra("editHumAmbMin", editHumAmbMin.getText().toString());
+                i.putExtra("editHumAmbMax", editHumAmbMax.getText().toString());
+                i.putExtra("edithummin",  edithummin.getText().toString());
+                i.putExtra("editHumMax",editHumMax.getText().toString() );
+
                 startActivity(i);
             }
         });
+
 
         btnSetear.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
@@ -357,23 +376,49 @@ public class MainActivity extends Activity implements SensorEventListener {
     public void onResume() {
         super.onResume();
         //Get MAC address from DeviceListActivity via intent
-        Intent intent = getIntent();
+        Intent i = getIntent();
 
         //Get the MAC address from the DeviceListActivty via EXTRA
-        address = intent.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
-        mensaje = intent.getStringExtra(Main2Activity.Configurar);
+        address = i.getStringExtra(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+        mensaje = i.getStringExtra(Main2Activity.Configurar);
 
         ConexionBlue();
 
         Bundle datos = this.getIntent().getExtras();
-            //  editTempAmbientemin = datos.getString("editTempAmbientemin");
-            //  editTempAmbienteMax=  datos.getString("editTempAmbienteMax");
-            //  editHumAmbMin= datos.getString("editHumAmbMin");
-            //   editHumAmbMax = datos.getString("editHumAmbMax");
-            //   edithummin= datos.getString("edithummin");
-            //  editHumMax= datos.getString("editHumMax");
+        led  = datos.getInt("led");
 
+        riego =  datos.getInt("riego");
+        reset =  datos.getInt("reset");
+        ventilacion = datos.getInt("ventilacion");
 
+        if( reset ==2){//modoautomatico
+            SWLed.setEnabled(false);
+            SWModo.setChecked(true);
+            SWVentilacion.setEnabled(false);
+            SWRiego.setEnabled(false);
+}
+        else
+        {//modo manual
+            if(led==1){ SWLed.setChecked(true);
+              }
+            else SWLed.setChecked(false);
+            if(riego==0)
+                SWRiego.setChecked(false);
+            else
+            {SWRiego.setChecked(true);  }
+            if(ventilacion==0)
+                SWVentilacion.setChecked(false);
+            else { SWVentilacion.setChecked(true);}
+
+            SWModo.setChecked(false);
+        }
+
+        editTempAmbientemin.setText( datos.getString("editTempAmbientemin"));
+        editTempAmbienteMax.setText(datos.getString("editTempAmbienteMax"));
+        editHumAmbMin.setText( datos.getString("editHumAmbMin"));
+        editHumAmbMax.setText(datos.getString("editHumAmbMax"));
+        edithummin.setText( datos.getString("edithummin"));
+        editHumMax.setText( datos.getString("editHumMax" ));
     }
     //para hacer la conexion con el bluetooth con el dispositivo seleccionado en la pagina de lista de dispositivos
     public void ConexionBlue() {
@@ -442,7 +487,8 @@ public class MainActivity extends Activity implements SensorEventListener {
                         //near
                         Toast.makeText(getApplicationContext(), "Cerca", Toast.LENGTH_SHORT).show();
                         led = 1;
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":0}");
+
+                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     } else {
                     }
                     //   Toast.makeText(getBaseContext(), "proximidad detectada" + txt, Toast.LENGTH_SHORT).show();
@@ -461,7 +507,8 @@ public class MainActivity extends Activity implements SensorEventListener {
 
 
                         led = 1;
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":0}");
+
+                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                     }
                     // luminosidad.setText(txt);
                     break;
@@ -472,7 +519,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                     if ((Math.abs(values[0]) > ACC || Math.abs(values[1]) > ACC || Math.abs(values[2]) > ACC)) {
                         Log.i("sensor", "running");
                         led = 1;
-                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":0}");
+                        mConnectedThread.write("{\"Led\":" + led + ",\"Riego\":" + riego + ",\"Ventilacion\":" + ventilacion + ",\"Reset\":"+reset+"}");
                         Toast.makeText(getBaseContext(), "shake prendo led", Toast.LENGTH_SHORT).show();
                     }
 

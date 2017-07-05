@@ -34,6 +34,9 @@ public class Main2Activity extends Activity {
 
     private static String mensaje = null;
 
+    //datos e enviar
+    public int led , riego , ventilacion , reset ;
+    public String editTempAmbientemin ,editTempAmbienteMax,editHumAmbMin,editHumAmbMax,edithummin,editHumMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,29 +59,26 @@ public class Main2Activity extends Activity {
         sensorHumedadTierra.setText(intent1.getStringExtra("sensorHumedadTierra"));
         sensorNivelAgua.setText(intent1.getStringExtra("sensorNivelAgua"));
         sensorTemperaturaAmbiente.setText(intent1.getStringExtra("sensorTemperaturaAmbiente"));
-      /*  btnSetear.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(Main2Activity.this, MainActivity.class);
-
-                mensaje= "envio";
-                i.putExtra("editTempAmbienteMax",editTempAmbienteMax.getText().toString());
-                i.putExtra("editTempAmbientemin",editTempAmbientemin.getText().toString());
-                i.putExtra("editHumAmbMin",editHumAmbMin.getText().toString());
-                i.putExtra("editHumAmbMax",editHumAmbMax.getText().toString());
-                i.putExtra("edithummin",edithummin.getText().toString());
-                i.putExtra("editHumMax",editHumMax.getText().toString());
-
-                i.putExtra(EXTRA_DEVICE_ADDRESS, address);
-                i.putExtra(Configurar, mensaje);
-                startActivity(i);
-                Toast.makeText(getBaseContext(), "Set Configuracion", Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
        btnVolver.setOnClickListener(new View.OnClickListener(){
            public void onClick(View v) {
                 Intent i = new Intent(Main2Activity.this, MainActivity.class);
                i.putExtra(EXTRA_DEVICE_ADDRESS, address);
+
+
+               i.putExtra("led", led);
+               i.putExtra("riego", riego);
+               i.putExtra("ventilacion", ventilacion);
+               i.putExtra("reset", reset);
+               i.putExtra("editTempAmbientemin", editTempAmbientemin);
+               i.putExtra("editTempAmbienteMax", editTempAmbienteMax);
+               i.putExtra("editHumAmbMin", editHumAmbMin);
+               i.putExtra("editHumAmbMax", editHumAmbMax);
+               i.putExtra("edithummin",  edithummin);
+               i.putExtra("editHumMax",editHumMax );
+
+
+
                startActivity(i);
            }
         });
@@ -89,10 +89,22 @@ public class Main2Activity extends Activity {
     public void onResume() {
         super.onResume();
         //Get MAC address from DeviceListActivity via intent
-        Intent intent = getIntent();
+        Intent i = getIntent();
 
         //Get the MAC address from the MainActivity via EXTRA
-        address = intent.getStringExtra(MainActivity.EXTRA_DEVICE_ADDRESS);
+        address = i.getStringExtra(MainActivity.EXTRA_DEVICE_ADDRESS);
+        led  = i.getIntExtra("led",0);
+        riego =  i.getIntExtra("riego",0);
+        ventilacion = i.getIntExtra("ventilacion",0);
+        reset = i.getIntExtra("reset",0);
+        editTempAmbientemin = i.getStringExtra("editTempAmbientemin");
+        editTempAmbienteMax = i.getStringExtra("editTempAmbienteMax");
+        editHumAmbMin =  i.getStringExtra("editHumAmbMin");
+        editHumAmbMax = i.getStringExtra("editHumAmbMax");
+        edithummin = i.getStringExtra("edithummin");
+        editHumMax = i.getStringExtra("editHumMax" );
+
+        Log.i("main2", "adress : " + editTempAmbientemin + editTempAmbienteMax+editHumAmbMin+editHumAmbMax);
 
         //create device and set the MAC address
         Log.i("main2", "adress : " + address);
