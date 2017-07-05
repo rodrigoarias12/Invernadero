@@ -252,7 +252,7 @@ public class MainActivity extends Activity implements SensorEventListener {
         btnSetear.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
 
-                String mensaje1 = "{\"a\":" + editTempAmbientemin.getText() + ",\"b\":" + editTempAmbienteMax.getText() + ",\"c\":" + editHumAmbMin.getText() + ",\"d\":" + editHumAmbMax.getText() + ",\"e\":" + edithummin.getText() + ",\"f\":" + editHumMax.getText() +"}";
+                String mensaje1 = "{\"a\":" + editTempAmbientemin.getText() + ",\"b\":" + editTempAmbienteMax.getText() + ",\"c\":" + editHumAmbMin.getText() + ",\"d\":" + editHumAmbMax.getText() + ",\"e\":" + edithummin.getText() + ",\"f\":" + editHumMax.getText() + ",\"Reset\":9" + "}";
                 mConnectedThread.write(mensaje1);
                 // Toast.makeText(getBaseContext(), "Set Configuracion", Toast.LENGTH_SHORT).show();
                 Toast.makeText(getBaseContext(), mensaje1, Toast.LENGTH_SHORT).show();
